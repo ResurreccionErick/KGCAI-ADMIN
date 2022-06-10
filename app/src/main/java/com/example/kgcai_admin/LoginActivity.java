@@ -3,9 +3,11 @@ package com.example.kgcai_admin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,11 +22,19 @@ public class LoginActivity extends AppCompatActivity {
     private EditText txtEmail, txtPassword, btnRegister;
     private Button btnLogin;
     private FirebaseAuth firebaseAuth;
+    private Dialog loadingDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        loadingDialog = new Dialog(LoginActivity.this);
+        loadingDialog.setContentView(R.layout.loading_progress_bar); //initialize the loading dialog
+        loadingDialog.setCancelable(false);
+        loadingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        loadingDialog.show();
 
         txtEmail = findViewById(R.id.txtEmail_login);
         txtPassword = findViewById(R.id.txtPassword_login);
@@ -51,17 +61,27 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+        if(firebaseAuth.getCurrentUser()!=null){ //if user is currently logged in it will go to category activity
+            startActivity(new Intent(getApplicationContext(), CategoryActivity.class));
+            finish();
+        }
     }
 
     private void firebaseLogin(String email, String password) {
+        loadingDialog.show();
+
         firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                  if(task.isSuccessful()){
-                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                     startActivity(new Intent(getApplicationContext(), CategoryActivity.class));
+                     finish();
                  }else{
                      Toast.makeText(getApplicationContext(), "No User Found", Toast.LENGTH_SHORT).show();
                  }
+
+                 loadingDialog.dismiss();
             }
         });
     }
