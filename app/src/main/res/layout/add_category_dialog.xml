@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="#dcdcdc"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAddSubjDialog"
         android:layout_width="match_parent"
         android:layout_height="70dp"
@@ -35,6 +35,8 @@
         android:text="ADD"
         android:textSize="16dp"
         android:textStyle="bold"
+        android:background="@color/purple_700"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/txtAddSubjName"
         app:layout_constraintStart_toStartOf="@+id/txtAddSubjName"

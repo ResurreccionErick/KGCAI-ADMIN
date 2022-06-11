@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         loadingDialog.setContentView(R.layout.loading_progress_bar); //initialize the loading dialog
         loadingDialog.setCancelable(false);
         loadingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        loadingDialog.show();
+        //loadingDialog.show();
 
         txtEmail = findViewById(R.id.txtEmail_login);
         txtPassword = findViewById(R.id.txtPassword_login);
