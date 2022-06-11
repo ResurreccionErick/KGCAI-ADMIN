@@ -13,9 +13,9 @@ import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
-    private List <String> cat_list;
+    private List <CategoryModelClass> cat_list;
 
-    public CategoryAdapter(List<String> cat_list) {
+    public CategoryAdapter(List<CategoryModelClass> cat_list) {
         this.cat_list = cat_list;
     }
 
@@ -29,7 +29,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
-        String title = cat_list.get(position);
+        String title = cat_list.get(position).getName();
         holder.setData(title);
     }
 
