@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,6 +84,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         private void setData(String title, int position, CategoryAdapter adapter){
             catName.setText(title);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(itemView.getContext(), SetsActivity.class);
+                    itemView.getContext().startActivity(intent);
+                }
+            });
 
             btnDelete.setOnClickListener(new View.OnClickListener() { //if admin clicked the delete button
                 @Override

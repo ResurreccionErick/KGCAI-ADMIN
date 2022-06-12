@@ -101,6 +101,7 @@ public class CategoryActivity extends AppCompatActivity {
         Map<String,Object> catData = new ArrayMap<>();
         catData.put("NAME",title); //this is from AddNewSubj EditText
         catData.put("SETS",0); //sets set as zero value
+        catData.put("COUNTER","1");
 
         String doc_id = firestore.collection("QUIZ").document().getId(); //get all the ID from the QUIZ
 

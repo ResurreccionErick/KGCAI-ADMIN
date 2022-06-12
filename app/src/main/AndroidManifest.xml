@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KGCAIADMIN">
         <activity
+            android:name=".SetsActivity"
+            android:exported="true" />
+        <activity
             android:name=".CategoryActivity"
             android:exported="true" />
         <activity
