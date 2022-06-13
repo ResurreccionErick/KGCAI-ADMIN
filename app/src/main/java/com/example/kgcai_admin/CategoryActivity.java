@@ -33,10 +33,12 @@ public class CategoryActivity extends AppCompatActivity {
     private RecyclerView cat_recycler_view;
     public static List<CategoryModelClass> catList = new ArrayList<CategoryModelClass>();
     private FirebaseFirestore firestore;
-    private Dialog loadingDialog, addSubjDialog,editSubjDialog;
+    private Dialog loadingDialog, addSubjDialog, editSubjDialog;
     private EditText dialogSubjName;
     private Button dialogBtnAddSubj;
     private CategoryAdapter adapter;
+
+    public static int selected_cat_index = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +121,7 @@ public class CategoryActivity extends AppCompatActivity {
                         public void onSuccess(Void unused) {
                             Toast.makeText(getApplicationContext(), "Subject was added successfully", Toast.LENGTH_SHORT).show();
 
-                            catList.add(new CategoryModelClass(doc_id,title,"0")); //add id,title,and no of sets into catList arrayList
+                            catList.add(new CategoryModelClass(doc_id,title,"0","1")); //add id,title,and no of sets into catList arrayList
 
                             adapter.notifyItemInserted(catList.size()); //display new subjects added into the end
 
@@ -163,7 +165,7 @@ public class CategoryActivity extends AppCompatActivity {
                             String catName = doc.getString("CAT"+String.valueOf(i) +"_NAME"); //getting the CAT NAME and loop it to get the CAT_NAME in firebase
                             String catID = doc.getString("CAT"+String.valueOf(i) +"_ID"); //getting the CAT ID and loop it to get the CAT_ID in firebase
 
-                            catList.add(new CategoryModelClass(catID,catName,"0")); //then catName and catId will add it to the catList
+                            catList.add(new CategoryModelClass(catID,catName,"0","1")); //then catName and catId will add it to the catList
                         }
 
                         adapter = new CategoryAdapter(catList);

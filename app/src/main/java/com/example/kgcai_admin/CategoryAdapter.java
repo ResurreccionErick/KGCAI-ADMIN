@@ -1,5 +1,4 @@
 package com.example.kgcai_admin;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -84,10 +83,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         private void setData(String title, int position, CategoryAdapter adapter){
             catName.setText(title);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    CategoryActivity.selected_cat_index = position; //update the selected_cat_index from CategoryActivity into position
                     Intent intent = new Intent(itemView.getContext(), SetsActivity.class);
                     itemView.getContext().startActivity(intent);
                 }

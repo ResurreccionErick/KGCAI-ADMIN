@@ -3,11 +3,21 @@ package com.example.kgcai_admin;
 public class CategoryModelClass {
 
     private String id, name, noOfSets;
+    private String setCounter;
 
-    public CategoryModelClass(String id, String name, String noOfSets) {
+    public CategoryModelClass(String id, String name, String noOfSets, String setCounter) {
         this.id = id;
         this.name = name;
         this.noOfSets = noOfSets;
+        this.setCounter = setCounter;
+    }
+
+    public String getSetCounter() {
+        return setCounter;
+    }
+
+    public void setSetCounter(String setCounter) {
+        this.setCounter = setCounter;
     }
 
     public String getId() {
