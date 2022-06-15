@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.ArrayMap;
 import android.view.LayoutInflater;
@@ -80,6 +81,17 @@ public class SetsAdapter extends RecyclerView.Adapter<SetsAdapter.ViewHolder> {
             //setName.setText("SET " + String.valueOf(position + 1));
             setName.setText("SET " + String.valueOf(position + 1));
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    selected_cat_index = position; //this variable refers to the position of subject clicked
+
+                    Intent intent = new Intent(itemView.getContext(), QuestionActivity.class);
+                    itemView.getContext().startActivity(intent);
+                }
+            });
+
             deleteSet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -103,73 +115,6 @@ public class SetsAdapter extends RecyclerView.Adapter<SetsAdapter.ViewHolder> {
                 }
             });
         }
-//        private void deleteSet(int position, String setID, Context context, SetsAdapter adapter) {
-//            loadingDialog.show();
-//
-//            FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-//
-//            firestore.collection("QUIZ").document(catList.get(selected_cat_index).getId()).collection(setID).get()
-//                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//                        @Override
-//                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                            WriteBatch batch = firestore.batch();
-//
-//                            for(QueryDocumentSnapshot doc:queryDocumentSnapshots){
-//                                batch.delete(doc.getReference());
-//                            }
-//
-//                            batch.commit().addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                @Override
-//                                public void onSuccess(Void unused) {
-//                                    Map<String, Object> catDoc = new ArrayMap<>();
-//                                    int index = 1;
-//                                    for(int i = 0; i<setIds.size(); i++){
-//                                        if(i != position){
-//                                            catDoc.put("SET" + String.valueOf(index) + "_ID", setIds.get(i));
-//                                            index++;
-//                                        }
-//                                    }
-//                                    catDoc.put("SETS", index-1); //decrement the sets because it deleted
-//
-//                                    firestore.collection("QUIZ").document(catList.get(selected_cat_index).getId()) //update the firestore using catDoc
-//                                            .update(catDoc).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                        @Override
-//                                        public void onSuccess(Void unused) {
-//                                            Toast.makeText(context, "Set was successfully deleted", Toast.LENGTH_SHORT).show();
-//
-//                                            SetsActivity.setsIDs.remove(position); //remove the item from setIDs
-//
-//                                            catList.get(selected_cat_index).setNoOfSets(String.valueOf(SetsActivity.setsIDs.size()));
-//
-//                                            adapter.notifyDataSetChanged();
-//
-//                                            loadingDialog.dismiss();
-//                                        }
-//                                    }).addOnFailureListener(new OnFailureListener() {
-//                                        @Override
-//                                        public void onFailure(@NonNull Exception e) {
-//                                            Toast.makeText(context.getApplicationContext(), "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();
-//                                            loadingDialog.dismiss();
-//                                        }
-//                                    });
-//                                }
-//                            }).addOnFailureListener(new OnFailureListener() {
-//                                @Override
-//                                public void onFailure(@NonNull Exception e) {
-//                                    Toast.makeText(context.getApplicationContext(), "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();
-//                                    loadingDialog.dismiss();
-//                                }
-//                            });
-//                        }
-//                    }).addOnFailureListener(new OnFailureListener() {
-//                @Override
-//                public void onFailure(@NonNull Exception e) {
-//                    Toast.makeText(context.getApplicationContext(), "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();
-//                    loadingDialog.dismiss();
-//                }
-//            });
-//
-//        }
 
         private void deleteSet(final int pos, String setID, final Context context, final SetsAdapter adapter)
         {

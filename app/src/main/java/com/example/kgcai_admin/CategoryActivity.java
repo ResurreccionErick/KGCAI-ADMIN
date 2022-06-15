@@ -32,13 +32,13 @@ public class CategoryActivity extends AppCompatActivity {
     private FloatingActionButton btnAddSubj;
     private RecyclerView cat_recycler_view;
     public static List<CategoryModelClass> catList = new ArrayList<CategoryModelClass>();
+    public static int selected_cat_index = 0;
     private FirebaseFirestore firestore;
     private Dialog loadingDialog, addSubjDialog, editSubjDialog;
     private EditText dialogSubjName;
     private Button dialogBtnAddSubj;
     private CategoryAdapter adapter;
 
-    public static int selected_cat_index = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

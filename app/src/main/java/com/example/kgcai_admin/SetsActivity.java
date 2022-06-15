@@ -37,7 +37,10 @@ public class SetsActivity extends AppCompatActivity {
     private Button btnAdd;
     private SetsAdapter adapter;
     private String input;
+
     public static List<String> setsIDs = new ArrayList<>();
+    public static int selected_set_index=0;
+
     private FirebaseFirestore firestore;
 
 
@@ -103,7 +106,7 @@ public class SetsActivity extends AppCompatActivity {
         String current_counter = catList.get(selected_cat_index).getSetCounter();
 
         Map<String,Object> qData = new ArrayMap<>();
-        qData.put("SET_NAME","0");
+        qData.put("COUNT","0");
         //qData.put("COUNT", input);
 
         firestore.collection("QUIZ").document(current_cat_id)

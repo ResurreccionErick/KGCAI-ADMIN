@@ -65,7 +65,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
             catName = itemView.findViewById(R.id.tvSubjName);
             btnDelete = itemView.findViewById(R.id.btnSubjDelete);
-            btnEdit = itemView.findViewById(R.id.btnSubjEdit);
+            btnEdit = itemView.findViewById(R.id.btnSubjEditQuestion);
 
             loadingDialog = new Dialog(itemView.getContext());
             loadingDialog.setContentView(R.layout.loading_progress_bar); //initialize the loading dialog
