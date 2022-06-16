@@ -118,6 +118,7 @@ public class SetsActivity extends AppCompatActivity {
                 catDoc.put("COUNTER", String.valueOf(Integer.valueOf(current_counter)+1)); //after adding new sets. the Counter was incremented
                 catDoc.put("SET"+String.valueOf(setsIDs.size()+1)+"_ID", current_counter); //add another SET_ID
                 catDoc.put("SETS", setsIDs.size()+1); //increment value of SETS
+                
 
                 firestore.collection("QUIZ").document(current_cat_id).update(catDoc).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

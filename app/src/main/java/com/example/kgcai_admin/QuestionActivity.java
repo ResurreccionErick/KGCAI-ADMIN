@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.view.View;
@@ -54,7 +55,7 @@ public class QuestionActivity extends AppCompatActivity {
         btnAddNewQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getApplicationContext(), QuestionDetailsActivity.class));
             }
         });
 
@@ -92,7 +93,7 @@ public class QuestionActivity extends AppCompatActivity {
 
                     QueryDocumentSnapshot quesDoc = docList.get(quesID);
 
-                    quesList.add(new QuestionModel(
+                    quesList.add(new QuestionModel( //add int questionList
                             quesID,
                             quesDoc.getString("QUESTION"),
                             quesDoc.getString("A"),
@@ -118,6 +119,14 @@ public class QuestionActivity extends AppCompatActivity {
             }
         });
 
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(adapter!=null){
+            adapter.notifyDataSetChanged();
+        }
     }
 }
