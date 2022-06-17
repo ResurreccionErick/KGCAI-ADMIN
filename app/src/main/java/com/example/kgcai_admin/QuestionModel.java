@@ -1,10 +1,15 @@
 package com.example.kgcai_admin;
 
 public class QuestionModel {
-    private String quesID,question,optionA,optionB,optionC,optionD;
+    private String quesID;
+    private String question;
+    private String optionA;
+    private String optionB;
+    private String optionC;
+    private String optionD;
     private int answer;
 
-    public QuestionModel(String quesID, String question, String optionA, String optionB, String optionC, String optionD, int answer) {
+    public QuestionModel(String quesID, String question, String optionA, String optionB, String optionC, String optionD, Integer answer) {
         this.quesID = quesID;
         this.question = question;
         this.optionA = optionA;
@@ -66,7 +71,7 @@ public class QuestionModel {
         return answer;
     }
 
-    public void setAnswer(int answer) {
+    public void setAnswer(Integer answer) {
         this.answer = answer;
     }
 }

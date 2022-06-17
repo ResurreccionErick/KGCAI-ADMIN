@@ -126,9 +126,7 @@
             android:backgroundTint="#E91E63"
             android:ems="10"
             android:hint="Correct Answer Option"
-            android:inputType="number"
-            android:lines="2"
-            android:maxLines="3"
+            android:inputType="text"
             android:textColor="@android:color/black"
             android:textCursorDrawable="@null" />
 

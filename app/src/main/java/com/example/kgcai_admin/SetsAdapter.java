@@ -199,5 +199,88 @@ public class SetsAdapter extends RecyclerView.Adapter<SetsAdapter.ViewHolder> {
 
         }
 
+//        private void deleteSet(final int pos, String setID, final Context context, final SetsAdapter adapter)
+//        {
+//            loadingDialog.show();
+//
+//            final FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+//
+//            firestore.collection("QUIZ").document(catList.get(selected_cat_index).getId())
+//                    .collection(setID).get()
+//                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//                        @Override
+//                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//
+//                            WriteBatch batch = firestore.batch();
+//
+//                            for(QueryDocumentSnapshot doc : queryDocumentSnapshots)
+//                            {
+//                                batch.delete(doc.getReference());
+//                            }
+//
+//                            batch.commit().addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                @Override
+//                                public void onSuccess(Void aVoid) {
+//
+//                                    Map<String, Object> catDoc = new ArrayMap<>();
+//                                    int index=1;
+//                                    for(int i=0; i< setIds.size();  i++)
+//                                    {
+//                                        if(i != pos)
+//                                        {
+//                                            catDoc.put("SET" + String.valueOf(index) + "_ID", setIds.get(i));
+//                                            index++;
+//                                        }
+//                                    }
+//
+//                                    catDoc.put("SETS", index-1);
+//
+//                                    firestore.collection("QUIZ").document(catList.get(selected_cat_index).getId())
+//                                            .update(catDoc)
+//                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                                @Override
+//                                                public void onSuccess(Void aVoid) {
+//                                                    Toast.makeText(context,"Set deleted Sucesfully",Toast.LENGTH_SHORT).show();
+//
+//                                                    SetsActivity.setsIDs.remove(pos);
+//
+//                                                    catList.get(selected_cat_index).setNoOfSets(String.valueOf(SetsActivity.setsIDs.size()));
+//
+//                                                    adapter.notifyDataSetChanged();
+//
+//                                                    loadingDialog.dismiss();
+//
+//                                                }
+//                                            })
+//                                            .addOnFailureListener(new OnFailureListener() {
+//                                                @Override
+//                                                public void onFailure(@NonNull Exception e) {
+//                                                    Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT).show();
+//                                                    loadingDialog.dismiss();
+//                                                }
+//                                            });
+//
+//                                }
+//                            })
+//                                    .addOnFailureListener(new OnFailureListener() {
+//                                        @Override
+//                                        public void onFailure(@NonNull Exception e) {
+//                                            Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT).show();
+//                                            loadingDialog.dismiss();
+//                                        }
+//                                    });
+//
+//                        }
+//                    })
+//                    .addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT).show();
+//                            loadingDialog.dismiss();
+//                        }
+//                    });
+//
+//        }
+
     }
 }

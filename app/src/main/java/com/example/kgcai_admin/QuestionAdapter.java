@@ -10,6 +10,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.ArrayMap;
 import android.view.LayoutInflater;
@@ -76,8 +77,18 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
         }
 
-        private void setData(int pos, QuestionAdapter adapter){
+        private void setData(final int pos, QuestionAdapter adapter){
             title.setText("QUESTION " + String.valueOf(pos+1));
+
+            btnEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(itemView.getContext(), QuestionDetailsActivity.class);
+                    intent.putExtra("ACTION","EDIT"); //pass this into questionDetailsActivity to help to identify if its edit or add question
+                    intent.putExtra("Q_ID", pos);
+                    itemView.getContext().startActivity(intent);
+                }
+            });
 
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override

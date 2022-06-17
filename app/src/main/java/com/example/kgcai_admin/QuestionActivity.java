@@ -14,9 +14,11 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.ArrayMap;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,13 +41,15 @@ public class QuestionActivity extends AppCompatActivity {
     private FirebaseFirestore firestore;
     private Dialog loadingDialog;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
         quesView = findViewById(R.id.questionRecyclerView);
-        btnAddNewQuestion=findViewById(R.id.btnAddNewQuestion);
+        btnAddNewQuestion = findViewById(R.id.btnAddNewQuestion);
 
         loadingDialog = new Dialog(QuestionActivity.this);
         loadingDialog.setContentView(R.layout.loading_progress_bar); //initialize the loading dialog
@@ -55,78 +59,98 @@ public class QuestionActivity extends AppCompatActivity {
         btnAddNewQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), QuestionDetailsActivity.class));
+                Intent intent = new Intent(QuestionActivity.this, QuestionDetailsActivity.class);
+                intent.putExtra("ACTION","ADD"); //pass this to questionDetailsAct help to identify if its add question or edit
+                startActivity(intent);
             }
         });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         quesView.setLayoutManager(layoutManager);
 
         firestore = FirebaseFirestore.getInstance();
 
         loadQuestions();
+
     }
 
-    private void loadQuestions() {
+    private void loadQuestions()
+    {
         quesList.clear();
 
         loadingDialog.show();
 
         firestore.collection("QUIZ").document(catList.get(selected_cat_index).getId())
-                .collection(setsIDs.get(selected_set_index)).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                .collection(setsIDs.get(selected_set_index)).get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
-                Map<String, QueryDocumentSnapshot> docList = new ArrayMap<>();
+                        Map<String, QueryDocumentSnapshot> docList = new ArrayMap<>();
 
-                for(QueryDocumentSnapshot doc : queryDocumentSnapshots){
-                    docList.put(doc.getId(),doc); //pass the id of the QueryDocumentSnapshot loop
-                }
+                        for(QueryDocumentSnapshot doc : queryDocumentSnapshots)
+                        {
+                            docList.put(doc.getId(),doc); //pass the id of the QueryDocumentSnapshot loop
+                        }
 
-                QueryDocumentSnapshot quesListDoc = docList.get("QUESTIONS_LIST");
+                        QueryDocumentSnapshot quesListDoc  = docList.get("QUESTIONS_LIST");
 
-                String count = quesListDoc.getString("COUNT"); //get the value of the COUNT in question_list
+                        String count = quesListDoc.getString("COUNT"); //get the value of the COUNT in question_list
 
-                for(int i = 0; i < Integer.valueOf(count); i++){
-                     String quesID = quesListDoc.getString("Q"+String.valueOf(i+1)+"_ID"); //get the id of the question in question_list
+                        for(int i=0; i < Integer.valueOf(count); i++)
+                        {
+                            String quesID = quesListDoc.getString("Q" + String.valueOf(i+1) + "_ID"); //get the id of the question in question_list
 
-                    QueryDocumentSnapshot quesDoc = docList.get(quesID);
+                            QueryDocumentSnapshot quesDoc = docList.get(quesID);
 
-                    quesList.add(new QuestionModel( //add int questionList
-                            quesID,
-                            quesDoc.getString("QUESTION"),
-                            quesDoc.getString("A"),
-                            quesDoc.getString("B"),
-                            quesDoc.getString("C"),
-                            quesDoc.getString("D"),
-                            Integer.valueOf(quesDoc.getString("ANSWER"))
+                            quesList.add(new QuestionModel( //add int questionList
+                                    quesID,
+                                    quesDoc.getString("QUESTION"),
+                                    quesDoc.getString("A"),
+                                    quesDoc.getString("B"),
+                                    quesDoc.getString("C"),
+                                    quesDoc.getString("D"),
+                                    Integer.valueOf(quesDoc.getString("ANSWER"))
+                            ));
 
-                    ));
-                }
-                adapter = new QuestionAdapter(quesList); //pass the question list into QuestionAdapter constructor
-                quesView.setAdapter(adapter); //set this recyclerview from QuestionAdapter
+                        }
 
-                loadingDialog.dismiss();
+                        adapter = new QuestionAdapter(quesList);  //pass the question list into QuestionAdapter constructor
+                        quesView.setAdapter(adapter);
 
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        loadingDialog.dismiss();
 
-                loadingDialog.dismiss();
-            }
-        });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(QuestionActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                        loadingDialog.dismiss();
+                    }
+                });
 
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        if(adapter!=null){
+        if(adapter != null) {
             adapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == android.R.id.home)
+        {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
