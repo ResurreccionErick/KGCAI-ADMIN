@@ -90,41 +90,50 @@ public class QuestionDetailsActivity extends AppCompatActivity {
                 dStr = txtOptionD.getText().toString();
                 ansStr = txtAnswer.getText().toString();
 
-//                if(qStr.isEmpty()) {
-//                    ques.setError("Enter Question");
-//                    return;
-//                }
-//
-//                if(aStr.isEmpty()) {
-//                    optionA.setError("Enter option A");
-//                    return;
-//                }
-//
-//                if(bStr.isEmpty()) {
-//                    optionB.setError("Enter option B ");
-//                    return;
-//                }
-//                if(cStr.isEmpty()) {
-//                    optionC.setError("Enter option C");
-//                    return;
-//                }
-//                if(dStr.isEmpty()) {
-//                    optionD.setError("Enter option D");
-//                    return;
-//                }
-//                if(ansStr.isEmpty()) {
-//                    answer.setError("Enter correct answer");
-//                    return;
-//                }
-
-                if(action.compareTo("EDIT") == 0) //If the action is edit... editQuestion method will call and if not addNewQuestion method will call
-                {
-                    editQuestion();
-                }
-                else {
-                    addNewQuestion();
+                if(qStr.isEmpty()) {
+                    txtQues.setError("Enter Question");
+                    txtQues.requestFocus();
+                    return;
                 }
 
+                if(aStr.isEmpty()) {
+                    txtOptionA.setError("Enter Option A");
+                    txtOptionA.requestFocus();
+                    return;
+                }
+
+                if(bStr.isEmpty()) {
+                    txtOptionB.setError("Enter Option B ");
+                    txtOptionB.requestFocus();
+                    return;
+                }
+                if(cStr.isEmpty()) {
+                    txtOptionC.setError("Enter Option C");
+                    txtOptionC.requestFocus();
+                    return;
+                }
+                if(dStr.isEmpty()) {
+                    txtOptionD.setError("Enter Option D");
+                    txtOptionD.requestFocus();
+                    return;
+                }
+                if(ansStr.isEmpty()) {
+                    txtAnswer.setError("Enter Correct Answer");
+                    txtAnswer.requestFocus();
+                    return;
+                }
+
+                if(Integer.valueOf(ansStr) > 4){
+                    Toast.makeText(getApplicationContext(), "Please pick between number 1-4 only", Toast.LENGTH_SHORT).show();
+                }else{
+                    if(action.compareTo("EDIT") == 0) //If the action is edit... editQuestion method will call and if not addNewQuestion method will call
+                    {
+                        editQuestion();
+                    }
+                    else {
+                        addNewQuestion();
+                    }
+                }
             }
         });
     }
@@ -154,9 +163,9 @@ public class QuestionDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
 
-                        Map<String,Object> quesDoc = new ArrayMap<>();
-                        quesDoc.put("Q" + String.valueOf(quesList.size() + 1) + "_ID", doc_id); //add new in q_id with random id
-                        quesDoc.put("COUNT",String.valueOf(quesList.size() + 1)); //count will increment
+                        Map<String, Object> quesDoc = new ArrayMap<>();
+                        quesDoc.put("Q" + String.valueOf(quesList.size()+1)+"_ID", doc_id); //add new in q_id with random id
+                        quesDoc.put("COUNT" , String.valueOf(quesList.size() + 1)); //count will increment
 
                         firestore.collection("QUIZ").document(catList.get(selected_cat_index).getId())
                                 .collection(setsIDs.get(selected_set_index)).document("QUESTIONS_LIST")

@@ -16,8 +16,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/white"/>
-
+        app:titleTextColor="@color/white"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <Button
         android:id="@+id/addQB"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="100dp"
         android:padding="16dp"
         android:text="Add"
         android:textSize="20sp"
@@ -33,14 +33,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/addQB"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +54,7 @@
             android:ems="10"
             android:hint="Question"
             android:inputType="textMultiLine"
-            android:lines="5"
+            android:lines="4"
             android:maxLines="7"
             android:textColor="@android:color/black"
             android:textCursorDrawable="@null" />
@@ -65,13 +63,13 @@
             android:id="@+id/optionA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:backgroundTint="@color/purple_700"
             android:ems="10"
             android:hint="Option A"
             android:inputType="textMultiLine"
-            android:lines="2"
-            android:maxLines="3"
+            android:lines="1"
+            android:maxLines="2"
             android:textColor="@android:color/black"
             android:textCursorDrawable="@null" />
 
@@ -79,13 +77,13 @@
             android:id="@+id/optionB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:backgroundTint="@color/purple_700"
             android:ems="10"
             android:hint="Option B"
             android:inputType="textMultiLine"
-            android:lines="2"
-            android:maxLines="3"
+            android:lines="1"
+            android:maxLines="2"
             android:textColor="@android:color/black"
             android:textCursorDrawable="@null" />
 
@@ -93,13 +91,13 @@
             android:id="@+id/optionC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:backgroundTint="@color/purple_700"
             android:ems="10"
             android:hint="Option C"
             android:inputType="textMultiLine"
-            android:lines="2"
-            android:maxLines="3"
+            android:lines="1"
+            android:maxLines="2"
             android:textColor="@android:color/black"
             android:textCursorDrawable="@null" />
 
@@ -107,13 +105,13 @@
             android:id="@+id/optionD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="25dp"
             android:backgroundTint="@color/purple_700"
             android:ems="10"
             android:hint="Option D"
             android:inputType="textMultiLine"
-            android:lines="2"
-            android:maxLines="3"
+            android:lines="1"
+            android:maxLines="2"
             android:textColor="@android:color/black"
             android:textCursorDrawable="@null" />
 
@@ -121,12 +119,10 @@
             android:id="@+id/answer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
             android:backgroundTint="#E91E63"
             android:ems="10"
             android:hint="Correct Answer Option"
-            android:inputType="text"
+            android:inputType="number"
             android:textColor="@android:color/black"
             android:textCursorDrawable="@null" />
 

@@ -7,6 +7,7 @@ import static com.example.kgcai_admin.SetsActivity.setsIDs;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -47,6 +47,12 @@ public class QuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
+
+        Toolbar toolbar = findViewById(R.id.questionToolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Question");
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         quesView = findViewById(R.id.questionRecyclerView);
         btnAddNewQuestion = findViewById(R.id.btnAddNewQuestion);
