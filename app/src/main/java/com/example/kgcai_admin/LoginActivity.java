@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         if(firebaseAuth.getCurrentUser()!=null){ //if user is currently logged in it will go to category activity
-            startActivity(new Intent(getApplicationContext(), CategoryActivity.class));
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }
     }
@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                  if(task.isSuccessful()){
-                     startActivity(new Intent(getApplicationContext(), CategoryActivity.class));
+                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                      finish();
                  }else{
                      Toast.makeText(getApplicationContext(), "No User Found", Toast.LENGTH_SHORT).show();

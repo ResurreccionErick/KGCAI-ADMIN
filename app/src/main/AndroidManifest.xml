@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KGCAIADMIN">
         <activity
+            android:name=".VideosActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+        <activity
             android:name=".QuestionDetailsActivity"
             android:exported="true" />
         <activity
