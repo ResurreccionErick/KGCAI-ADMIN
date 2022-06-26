@@ -6,61 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".VideosActivity">
 
-    <com.getbase.floatingactionbutton.FloatingActionsMenu
+    //recycler view that shows all videos
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/videoRv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/row_video" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAddVideo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
         android:clickable="true"
-        app:fab_labelsPosition="left"
-        app:fab_expandDirection="up"
-        app:fab_labelStyle="@style/FloatingStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_baseline_add_24">
+        app:maxImageSize="35dp"
+        app:srcCompat="@drawable/ic_baseline_add_24" />
 
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_language_literacy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fabSize="mini"
-            app:fab_icon="@drawable/language_logo"
-            app:fab_size="mini"
-            app:fab_title="Language Literacy" />
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_numeracy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fabSize="mini"
-            app:fab_icon="@drawable/number_logo"
-            app:fab_size="mini"
-            app:fab_title="Numeracy" />
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_filipino"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fabSize="mini"
-            app:fab_icon="@drawable/filipino_logo"
-            app:fab_size="mini"
-            app:fab_title="Filipino" />
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_readings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fab_icon="@drawable/read_logo"
-            app:fab_size="mini"
-            app:fab_title="Readings"
-            app:fab_labelsPosition="left"
-            android:layout_margin="10dp"
-            app:fab_labelStyle="@style/FloatingStyle"
-            />
-
-    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

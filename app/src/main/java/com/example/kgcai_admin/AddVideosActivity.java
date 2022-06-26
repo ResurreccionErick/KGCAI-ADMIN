@@ -51,7 +51,8 @@ public class AddVideosActivity extends AppCompatActivity {
 
     private Uri videoUri = null; //Uri picked video
 
-    private String title,picked;
+    private String title;
+    public static String picked;
     private ProgressDialog progressDialog;
 
     @Override
@@ -109,7 +110,6 @@ public class AddVideosActivity extends AppCompatActivity {
         //timestamp
         String timeStamp = ""+System.currentTimeMillis();
 
-//        if(picked == "Numeracy_Videos"){
         String filePathAndName = picked+"/"+"video_"+timeStamp;
 
         //storage reference
@@ -145,6 +145,7 @@ public class AddVideosActivity extends AppCompatActivity {
                                             progressDialog.dismiss();
                                             Toast.makeText(getApplicationContext(), "Video uploaded", Toast.LENGTH_SHORT).show();
                                             finish();
+                                            startActivity(new Intent(getApplicationContext(), MainVideosActivity.class));
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -174,7 +175,7 @@ public class AddVideosActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int i) {
                 if(i==0){
-                    //when option camera was choosen
+                    //when option camera was chosen
                     if(!checkCameraPermission()){
                         //camera permission not allowed, request it
                         requestCameraPermission();
@@ -254,7 +255,8 @@ public class AddVideosActivity extends AppCompatActivity {
                     }
                     else{
                         //both or one permission denied
-                        Toast.makeText(getApplicationContext(), "Camera and Storage are required", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Camera and Storage are required, You need to re-install the application", Toast.LENGTH_SHORT).show();
+                        requestCameraPermission();
 
                     }
                 }
