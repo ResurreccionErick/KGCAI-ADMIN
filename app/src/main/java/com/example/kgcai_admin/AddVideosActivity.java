@@ -132,7 +132,7 @@ public class AddVideosActivity extends AppCompatActivity {
                             //now we can add video details to our firebase db
                             HashMap<String, Object> hashMap = new HashMap<>();
                             hashMap.put("id",""+timeStamp);
-                            hashMap.put("title",""+title);
+                            hashMap.put("title",""+"Title: "+title);
                             hashMap.put("timestamp",""+timeStamp);
                             hashMap.put("videoUrl",""+downloadUri);
 

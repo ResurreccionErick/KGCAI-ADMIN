@@ -19,13 +19,14 @@
         android:id="@+id/btnAddVideo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:maxImageSize="35dp"
         app:srcCompat="@drawable/ic_baseline_add_24" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

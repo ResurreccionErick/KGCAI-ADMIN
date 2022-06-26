@@ -1,18 +1,34 @@
 package com.example.kgcai_admin;
 
+import static com.example.kgcai_admin.AddVideosActivity.picked;
+
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.auth.api.signin.internal.Storage;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -51,15 +67,39 @@ public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.HolderVideo>
         String timestamp = modelVideo.getTimeStamp();
         String videoUrl = modelVideo.getVideoUrl();
 
-        //format timestamp
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTimeInMillis(Long.parseLong(timestamp));
-//        String formattedDateTime = DateFormat.format("dd/MM/yyyy K:mm a", calendar).toString();
-
         //set data
         holder.titleTv.setText(title);
         //holder.timeTv.setText(formattedDateTime);
         setVideoUrl(modelVideo, holder);
+
+        holder.fabDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //show alert dialog, confirm to delete
+                android.app.AlertDialog dialog = new AlertDialog.Builder(context)
+                        .setTitle("Delete Set")
+                        .setMessage("Do you want to delete this video? "+title)
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //confirm to delete
+                                deleteVideo(modelVideo);
+                            }
+                        })
+                        .setNegativeButton("Cancel",null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
+                dialog.getButton(dialog.BUTTON_POSITIVE).setBackgroundColor(Color.RED);
+                dialog.getButton(dialog.BUTTON_NEGATIVE).setBackgroundColor(Color.BLUE);
+                dialog.getButton(dialog.BUTTON_POSITIVE).setTextColor(Color.WHITE);
+                dialog.getButton(dialog.BUTTON_NEGATIVE).setTextColor(Color.WHITE);
+
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.setMargins(0,0,50,0);
+                dialog.getButton(dialog.BUTTON_NEGATIVE).setLayoutParams(params);
+            }
+        });
     }
 
     private void setVideoUrl(ModelVideo modelVideo, HolderVideo holder) {
@@ -123,6 +163,46 @@ public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.HolderVideo>
                 holder.progressBar.setVisibility(View.INVISIBLE);
             }
         });
+
+
+
+
+    }
+
+    private void deleteVideo(ModelVideo modelVideo) {
+        String videoId = modelVideo.getID();
+        String videoUrl = modelVideo.getVideoUrl();
+
+        //1. delete from firebase storage
+        StorageReference reference = FirebaseStorage.getInstance().getReferenceFromUrl(videoUrl);
+        reference.delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        //successfully deleted from firebase storage
+
+                        //2. delete from firebase database
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(picked);
+                        databaseReference.child(videoId).removeValue()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(context.getApplicationContext(), "Video was deleted successfully", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(context.getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                //failed deleting from firebase storage
+                Toast.makeText(context.getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -135,8 +215,9 @@ public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.HolderVideo>
 
         //UI views of row_video.xml
         VideoView videoView;
-        TextView titleTv, timeTv;
+        TextView titleTv;
         ProgressBar progressBar;
+        FloatingActionButton fabDelete;
 
         public HolderVideo(@NonNull View itemView) {
             super(itemView);
@@ -144,8 +225,9 @@ public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.HolderVideo>
             //init UI views of row_video.xml
             videoView = itemView.findViewById(R.id.videoView);
             titleTv = itemView.findViewById(R.id.txtTitle);
-            //timeTv = itemView.findViewById(R.id.txtTime);
             progressBar = itemView.findViewById(R.id.progressBar);
+            fabDelete = itemView.findViewById(R.id.fab_delete);
+
 
 
         }

@@ -69,6 +69,7 @@ public class VideosActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //clear list before adding data into it
+                videoArrayList.clear();
                 for(DataSnapshot ds: snapshot.getChildren()){
                     //get data
                     ModelVideo modelVideo = ds.getValue(ModelVideo.class);
