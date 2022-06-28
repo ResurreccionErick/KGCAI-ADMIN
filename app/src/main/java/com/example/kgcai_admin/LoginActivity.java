@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        if(firebaseAuth.getCurrentUser()!=null){ //if user is currently logged in it will go to category activity
+        if(firebaseAuth.getCurrentUser()!=null){ //if user is currently logged in it will go to main activity
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }

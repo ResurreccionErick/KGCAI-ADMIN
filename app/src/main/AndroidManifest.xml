@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KGCAIADMIN">
         <activity
+            android:name=".MainStudentActivity"
+            android:exported="true" />
+        <activity
+            android:name=".StudentRegisterActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainVideosActivity"
             android:exported="true" />
         <activity
