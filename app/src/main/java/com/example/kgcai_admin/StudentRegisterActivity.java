@@ -1,22 +1,37 @@
 package com.example.kgcai_admin;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.auth.User;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.regex.Pattern;
 
@@ -24,6 +39,11 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
     private EditText txtName, txtEmail, txtPass;
     private Button btnRegister;
+    private ImageView imgRegister;
+
+    static int REQUEST_CODE = 1;
+
+    Uri pickedImg;
 
     FirebaseAuth firebaseAuth;
 
@@ -37,10 +57,22 @@ public class StudentRegisterActivity extends AppCompatActivity {
         txtName = findViewById(R.id.txtRegisterName);
         txtEmail = findViewById(R.id.txtRegisterEmail);
         txtPass = findViewById(R.id.txtRegisterPassword);
+        imgRegister = findViewById(R.id.imgRegister);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
         btnRegister = findViewById(R.id.btnRegister);
+
+        imgRegister.setOnClickListener(new View.OnClickListener() { //pick image
+            @Override
+            public void onClick(View v) {
+                if(Build.VERSION.SDK_INT >= 22){
+                    checkAndRequestPermission();
+                }else{
+                    openGallery();
+                }
+            }
+        });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +82,9 @@ public class StudentRegisterActivity extends AppCompatActivity {
                 email = txtEmail.getText().toString().trim();
                 pass = txtPass.getText().toString().trim();
 
+                if(pickedImg==null){
+                    Toast.makeText(getApplicationContext(), "Please pick a picture", Toast.LENGTH_SHORT).show();
+                }
                 if (name.isEmpty()) {
                     txtName.setError("Please Enter Student Name");
                     txtName.requestFocus();
@@ -83,6 +118,33 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
     }
 
+    private void checkAndRequestPermission() {
+        if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(StudentRegisterActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+        }else{
+            openGallery();
+        }
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Image") , REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
+            if(data!=null){
+                pickedImg = data.getData();
+                imgRegister.setImageURI(pickedImg); //set it into registerActivity imageview
+            }
+
+        }
+    }
+
     private void registerStudent(String email, String pass) {
         firebaseAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -96,6 +158,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             Toast.makeText(getApplicationContext(), "Successfully Registered", Toast.LENGTH_SHORT).show();
+                                            updateUi(name,pickedImg, firebaseAuth.getCurrentUser());
                                             finish();
                                         }
                                     });
@@ -105,6 +168,27 @@ public class StudentRegisterActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void updateUi(String name, Uri pickedImg, FirebaseUser currentUser) {
+        StorageReference reference = FirebaseStorage.getInstance().getReference().child("user_image");
+        final StorageReference imgFilePath = reference.child(pickedImg.getLastPathSegment());
+
+        imgFilePath.putFile(pickedImg).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                imgFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(name)
+                                .setPhotoUri(uri)
+                                .build();
+                        currentUser.updateProfile(userProfileChangeRequest);
+                    }
+                });
             }
         });
     }

@@ -25,14 +25,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
-        android:hint="Name"
+        android:hint="Full Name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/imgRegister" />
 
     <EditText
         android:id="@+id/txtRegisterEmail"
@@ -73,4 +74,18 @@
         app:layout_constraintEnd_toEndOf="@+id/txtRegisterPassword"
         app:layout_constraintStart_toStartOf="@+id/txtRegisterPassword"
         app:layout_constraintTop_toBottomOf="@+id/txtRegisterPassword" />
+
+    <ImageView
+        android:id="@+id/imgRegister"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:srcCompat="@drawable/add_img_logo"
+        android:padding="15dp"
+        android:background="#2196F3"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

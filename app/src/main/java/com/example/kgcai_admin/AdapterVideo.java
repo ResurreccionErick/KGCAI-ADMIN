@@ -228,8 +228,6 @@ public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.HolderVideo>
             progressBar = itemView.findViewById(R.id.progressBar);
             fabDelete = itemView.findViewById(R.id.fab_delete);
 
-
-
         }
     }
 }
