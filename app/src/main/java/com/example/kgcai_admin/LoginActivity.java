@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -48,6 +49,11 @@ public class LoginActivity extends AppCompatActivity {
                 String email = txtEmail.getText().toString();
                 String password = txtPassword.getText().toString();
 
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    txtEmail.setError("Please enter a valid email address");
+                    txtEmail.requestFocus();
+                    return;
+                }
                 if(email.isEmpty()||password.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Please enter all fields", Toast.LENGTH_SHORT).show();
                 }

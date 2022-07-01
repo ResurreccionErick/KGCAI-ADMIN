@@ -34,6 +34,8 @@ import java.util.concurrent.atomic.LongAdder;
 
 public class QuestionActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
+
     private RecyclerView quesView;
     private FloatingActionButton btnAddNewQuestion;
     public static List<QuestionModel> quesList = new ArrayList<>();
@@ -48,10 +50,11 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
-        Toolbar toolbar = findViewById(R.id.questionToolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Question");
 
+        toolbar = findViewById(R.id.toolbar_question);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Add Question");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         quesView = findViewById(R.id.questionRecyclerView);
@@ -150,13 +153,11 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if(item.getItemId() == android.R.id.home)
-        {
-            finish();
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) { //this is for back button
+        if (item.getItemId() == android.R.id.home) {
+            QuestionActivity.this.finish();
         }
-
         return super.onOptionsItemSelected(item);
     }
+
 }

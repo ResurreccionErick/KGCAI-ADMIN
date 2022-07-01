@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.util.ArrayMap;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -29,6 +30,8 @@ import java.util.Map;
 
 public class CategoryActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
+
     private FloatingActionButton btnAddSubj;
     private RecyclerView cat_recycler_view;
     public static List<CategoryModelClass> catList = new ArrayList<CategoryModelClass>();
@@ -39,11 +42,18 @@ public class CategoryActivity extends AppCompatActivity {
     private Button dialogBtnAddSubj;
     private CategoryAdapter adapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
+
+        toolbar = findViewById(R.id.toolbar_subjects);
+        btnAddSubj = findViewById(R.id.btnAddNewSubj);
+        cat_recycler_view = findViewById(R.id.subjRecyclerView);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Subjects");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         loadingDialog = new Dialog(CategoryActivity.this);
         loadingDialog.setContentView(R.layout.loading_progress_bar); //initialize the loading dialog
@@ -60,11 +70,6 @@ public class CategoryActivity extends AppCompatActivity {
 
         firestore = FirebaseFirestore.getInstance();
 
-        btnAddSubj = findViewById(R.id.btnAddNewSubj);
-        cat_recycler_view = findViewById(R.id.subjRecyclerView);
-
-        Toolbar toolbar = findViewById(R.id.subjToolbar);
-        setSupportActionBar(toolbar);
 
         btnAddSubj.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,7 +155,7 @@ public class CategoryActivity extends AppCompatActivity {
     private void loadData() {
         loadingDialog.show();
 
-        //catList.clear(); //Clear the arraylist of the subject
+        catList.clear(); //Clear the arraylist of the subject
 
         firestore.collection("QUIZ").document("Categories")
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -181,5 +186,13 @@ public class CategoryActivity extends AppCompatActivity {
                 loadingDialog.dismiss();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) { //this is for back button
+        if (item.getItemId() == android.R.id.home) {
+            CategoryActivity.this.finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

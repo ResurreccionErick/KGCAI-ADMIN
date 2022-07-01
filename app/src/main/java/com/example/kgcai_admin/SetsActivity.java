@@ -32,6 +32,8 @@ import java.util.Map;
 
 public class SetsActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
+
     private FloatingActionButton btnAddSets;
     private RecyclerView setsView;
     private Dialog addSetsDialog,loadingDialog;
@@ -51,11 +53,12 @@ public class SetsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sets);
 
-        Toolbar toolbar = findViewById(R.id.setsToolbar);
+        toolbar = findViewById(R.id.toolbar_sets);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Sets");
+        getSupportActionBar().setTitle("Add Sets");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         setsView = findViewById(R.id.setsRecyclerView);
         btnAddSets = findViewById(R.id.btnAddNewSets);
@@ -181,15 +184,13 @@ public class SetsActivity extends AppCompatActivity {
 
     }
 
-
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if(item.getItemId() == android.R.id.home)
-        {
-            finish();
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) { //this is for back button
+        if (item.getItemId() == android.R.id.home) {
+            SetsActivity.this.finish();
         }
-
         return super.onOptionsItemSelected(item);
     }
+
+
 }

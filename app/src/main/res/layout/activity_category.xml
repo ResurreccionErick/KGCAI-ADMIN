@@ -8,17 +8,16 @@
     >
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/subjToolbar"
+        android:id="@+id/toolbar_subjects"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/purple_700"
-        app:title="Subjects"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/white"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+        app:titleTextColor="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/subjRecyclerView"
@@ -34,7 +33,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnAddNewSubj"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subjToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_subjects" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAddNewSubj"

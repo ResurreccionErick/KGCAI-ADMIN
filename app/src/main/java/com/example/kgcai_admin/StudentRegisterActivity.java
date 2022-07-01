@@ -3,6 +3,7 @@ package com.example.kgcai_admin;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -13,6 +14,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +41,8 @@ import java.util.regex.Pattern;
 
 public class StudentRegisterActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
+
     private EditText txtName, txtEmail, txtPass;
     private Button btnRegister;
     private ImageView imgRegister;
@@ -57,6 +61,8 @@ public class StudentRegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_register);
 
+        toolbar = findViewById(R.id.toolbar_register);
+
         txtName = findViewById(R.id.txtRegisterName);
         txtEmail = findViewById(R.id.txtRegisterEmail);
         txtPass = findViewById(R.id.txtRegisterPassword);
@@ -67,6 +73,10 @@ public class StudentRegisterActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         btnRegister = findViewById(R.id.btnRegister);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Student Registration");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         imgRegister.setOnClickListener(new View.OnClickListener() { //pick image
             @Override
@@ -214,6 +224,13 @@ public class StudentRegisterActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) { //this is for back button
+        if (item.getItemId() == android.R.id.home) {
+            StudentRegisterActivity.this.finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }
 
