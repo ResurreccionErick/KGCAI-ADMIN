@@ -43,4 +43,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'com.getbase:floatingactionbutton:1.10.1' //action button menu
+
+    implementation 'de.hdodenhof:circleimageview:3.1.0' //circle image view
 }

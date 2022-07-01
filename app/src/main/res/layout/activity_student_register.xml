@@ -83,9 +83,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:srcCompat="@drawable/add_img_logo"
-        android:padding="15dp"
-        android:background="#2196F3"/>
+        android:src="@drawable/add_img_logo"
+        android:background="#2196F3"
+        android:padding="10dp"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

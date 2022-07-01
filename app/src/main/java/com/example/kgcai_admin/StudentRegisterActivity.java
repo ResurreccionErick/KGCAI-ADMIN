@@ -27,12 +27,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.auth.User;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class StudentRegisterActivity extends AppCompatActivity {
@@ -46,6 +48,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
     Uri pickedImg;
 
     FirebaseAuth firebaseAuth;
+    DatabaseReference reference;
 
     String name, email, pass;
 
@@ -58,6 +61,8 @@ public class StudentRegisterActivity extends AppCompatActivity {
         txtEmail = findViewById(R.id.txtRegisterEmail);
         txtPass = findViewById(R.id.txtRegisterPassword);
         imgRegister = findViewById(R.id.imgRegister);
+
+        reference = FirebaseDatabase.getInstance().getReference().child("Score");
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -173,8 +178,8 @@ public class StudentRegisterActivity extends AppCompatActivity {
     }
 
     private void updateUi(String name, Uri pickedImg, FirebaseUser currentUser) {
-        StorageReference reference = FirebaseStorage.getInstance().getReference().child("user_image");
-        final StorageReference imgFilePath = reference.child(pickedImg.getLastPathSegment());
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("user_image");
+        final StorageReference imgFilePath = storageReference.child(pickedImg.getLastPathSegment());
 
         imgFilePath.putFile(pickedImg).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -187,6 +192,22 @@ public class StudentRegisterActivity extends AppCompatActivity {
                                 .setPhotoUri(uri)
                                 .build();
                         currentUser.updateProfile(userProfileChangeRequest);
+                        HashMap hashMap = new HashMap();
+                        hashMap.put("name",name);
+                        hashMap.put("image",uri.toString());
+                        hashMap.put("score",0);
+                        reference.child(currentUser.getUid()).setValue(hashMap)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(getApplicationContext(), "Data Inserted", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
             }
