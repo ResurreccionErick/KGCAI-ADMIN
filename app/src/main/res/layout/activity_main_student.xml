@@ -32,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar_mainStudent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnLeaderboards"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginStart="32dp"

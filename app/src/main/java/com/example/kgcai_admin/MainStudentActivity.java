@@ -14,7 +14,7 @@ public class MainStudentActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
-    private Button btnRegisterNewStudent;
+    private Button btnRegisterNewStudent,btnLeaderboards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +27,20 @@ public class MainStudentActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Student");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
+        btnLeaderboards = findViewById(R.id.btnLeaderboards);
         btnRegisterNewStudent = findViewById(R.id.btnRegisterNewStudent);
 
         btnRegisterNewStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), StudentRegisterActivity.class));
+            }
+        });
+
+        btnLeaderboards.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), LeaderboardsActivity.class));
             }
         });
     }

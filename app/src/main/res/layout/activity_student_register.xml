@@ -21,19 +21,27 @@
 
 
     <EditText
-        android:id="@+id/txtRegisterName"
-        android:layout_width="match_parent"
+        android:id="@+id/txtRegisterFName"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="32dp"
         android:ems="10"
-        android:hint="Full Name"
+        android:hint="First Name"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgRegister" />
+
+    <EditText
+        android:id="@+id/txtRegisterLName"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:hint="Last Name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtRegisterFName" />
 
     <EditText
         android:id="@+id/txtRegisterEmail"
@@ -45,9 +53,9 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:hint="Email Address"
-        app:layout_constraintEnd_toEndOf="@+id/txtRegisterName"
-        app:layout_constraintStart_toStartOf="@+id/txtRegisterName"
-        app:layout_constraintTop_toBottomOf="@+id/txtRegisterName" />
+        app:layout_constraintEnd_toEndOf="@+id/txtRegisterFName"
+        app:layout_constraintStart_toStartOf="@+id/txtRegisterFName"
+        app:layout_constraintTop_toBottomOf="@+id/txtRegisterFName" />
 
     <EditText
         android:id="@+id/txtRegisterPassword"

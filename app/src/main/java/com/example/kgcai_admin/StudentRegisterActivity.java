@@ -43,7 +43,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
-    private EditText txtName, txtEmail, txtPass;
+    private EditText txtFName,txtLName, txtEmail, txtPass;
     private Button btnRegister;
     private ImageView imgRegister;
 
@@ -54,7 +54,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     DatabaseReference reference;
 
-    String name, email, pass;
+    String fName,lName,fullName, email, pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,8 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar_register);
 
-        txtName = findViewById(R.id.txtRegisterName);
+        txtFName = findViewById(R.id.txtRegisterFName);
+        txtLName = findViewById(R.id.txtRegisterLName);
         txtEmail = findViewById(R.id.txtRegisterEmail);
         txtPass = findViewById(R.id.txtRegisterPassword);
         imgRegister = findViewById(R.id.imgRegister);
@@ -93,40 +94,49 @@ public class StudentRegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                name = txtName.getText().toString().trim();
+                fName = txtFName.getText().toString().trim();
+                lName = txtLName.getText().toString().trim();
+                fullName = fName + " " + lName;
                 email = txtEmail.getText().toString().trim();
                 pass = txtPass.getText().toString().trim();
 
                 if(pickedImg==null){
                     Toast.makeText(getApplicationContext(), "Please pick a picture", Toast.LENGTH_SHORT).show();
                 }
-                if (name.isEmpty()) {
-                    txtName.setError("Please Enter Student Name");
-                    txtName.requestFocus();
+                else if (fName.isEmpty()) {
+                    txtFName.setError("Please Enter Student First Name");
+                    txtFName.requestFocus();
                     return;
                 }
-                if (email.isEmpty()) {
+                else if (lName.isEmpty()) {
+                    txtLName.setError("Please Enter Student Last Name");
+                    txtLName.requestFocus();
+                    return;
+                }
+                else if (email.isEmpty()) {
                     txtEmail.setError("Please Enter Student Email Address");
                     txtEmail.requestFocus();
                     return;
                 }
-                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     txtEmail.setError("Please Enter A Valid Email Address");
                     txtEmail.requestFocus();
                     return;
                 }
-                if (pass.isEmpty()) {
+                else if (pass.isEmpty()) {
                     txtPass.setError("Please Enter Student Password");
                     txtPass.requestFocus();
                     return;
                 }
-                if (pass.length() < 6) {
+                else if (pass.length() < 6) {
                     txtPass.setError("Password length should be more than 6 characters");
                     txtPass.requestFocus();
                     return;
+                }else{
+                    registerStudent(email, pass);
                 }
 
-                registerStudent(email, pass);
+
             }
 
         });
@@ -166,14 +176,14 @@ public class StudentRegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            UserModel user = new UserModel(name, email);
+                            UserModel user = new UserModel(fullName, email);
 
                             FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user) //add it on firebase db
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             Toast.makeText(getApplicationContext(), "Successfully Registered", Toast.LENGTH_SHORT).show();
-                                            updateUi(name,pickedImg, firebaseAuth.getCurrentUser());
+                                            updateUi(fullName,pickedImg, firebaseAuth.getCurrentUser());
                                             finish();
                                         }
                                     });
