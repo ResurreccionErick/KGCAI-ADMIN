@@ -1,4 +1,4 @@
-package com.example.kgcai_admin;
+package com.example.kgcai_admin.adapter;
 
 import static com.example.kgcai_admin.AddVideosActivity.picked;
 
@@ -21,10 +21,12 @@ import android.widget.VideoView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.auth.api.signin.internal.Storage;
+import com.example.kgcai_admin.ModelVideo;
+import com.example.kgcai_admin.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -183,6 +185,7 @@ public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.HolderVideo>
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
+
                                         Toast.makeText(context.getApplicationContext(), "Video was deleted successfully", Toast.LENGTH_SHORT).show();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {

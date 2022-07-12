@@ -1,4 +1,4 @@
-package com.example.kgcai_admin;
+package com.example.kgcai_admin.adapter;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -19,6 +19,10 @@ import androidx.annotation.NonNull;
 import androidx.collection.ArrayMap;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.kgcai_admin.CategoryActivity;
+import com.example.kgcai_admin.CategoryModelClass;
+import com.example.kgcai_admin.R;
+import com.example.kgcai_admin.SetsActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;

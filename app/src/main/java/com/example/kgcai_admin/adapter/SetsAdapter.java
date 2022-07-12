@@ -1,4 +1,4 @@
-package com.example.kgcai_admin;
+package com.example.kgcai_admin.adapter;
 
 import static com.example.kgcai_admin.CategoryActivity.catList;
 import static com.example.kgcai_admin.CategoryActivity.selected_cat_index;
@@ -21,6 +21,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.kgcai_admin.QuestionActivity;
+import com.example.kgcai_admin.R;
+import com.example.kgcai_admin.SetsActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -87,7 +90,7 @@ public class SetsAdapter extends RecyclerView.Adapter<SetsAdapter.ViewHolder> {
 
                     selected_set_index = pos;
 
-                    Intent intent = new Intent(itemView.getContext(),QuestionActivity.class);
+                    Intent intent = new Intent(itemView.getContext(), QuestionActivity.class);
                     itemView.getContext().startActivity(intent);
                 }
             });

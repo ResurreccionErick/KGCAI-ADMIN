@@ -5,32 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddVideosActivity"
-    android:background="#dcdcdc">
+    >
 
 
-    <EditText
-        android:id="@+id/txtVideoTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/white"
-        android:ems="10"
-        android:hint="Video Title"
-        android:inputType="textNoSuggestions"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/videoView" />
+
 
     <VideoView
         android:id="@+id/videoView"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,13 +22,34 @@
         android:id="@+id/btnUploadVid"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="Upload video"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
-        android:text="Upload video"
-        app:layout_constraintEnd_toEndOf="@+id/txtVideoTitle"
-        app:layout_constraintStart_toStartOf="@+id/txtVideoTitle"
-        app:layout_constraintTop_toBottomOf="@+id/txtVideoTitle" />
+        android:hint="Video Title"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/videoView">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtVideoTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnPickVideo"
@@ -54,6 +58,10 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         android:clickable="true"
+        android:backgroundTint="#4CAF50"
+        android:src="@drawable/ic_baseline_add_24"
+        app:fabCustomSize="64dp"
+        app:maxImageSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_24" />

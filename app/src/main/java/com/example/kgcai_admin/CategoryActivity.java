@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.kgcai_admin.adapter.CategoryAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,7 +49,7 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category);
 
         toolbar = findViewById(R.id.toolbar_subjects);
-        btnAddSubj = findViewById(R.id.btnAddNewSubj);
+        //btnAddSubj = findViewById(R.id.btnAddNewSubj);
         cat_recycler_view = findViewById(R.id.subjRecyclerView);
 
         setSupportActionBar(toolbar);
@@ -71,13 +72,13 @@ public class CategoryActivity extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
 
 
-        btnAddSubj.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialogSubjName.getText().clear();
-                addSubjDialog.show();
-            }
-        });
+//        btnAddSubj.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialogSubjName.getText().clear();
+//                addSubjDialog.show();
+//            }
+//        });
 
         dialogBtnAddSubj.setOnClickListener(new View.OnClickListener() {
             @Override

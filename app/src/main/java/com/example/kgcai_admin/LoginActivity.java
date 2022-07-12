@@ -37,8 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         loadingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         //loadingDialog.show();
 
-        txtEmail = findViewById(R.id.txtEmail_login);
-        txtPassword = findViewById(R.id.txtPassword_login);
+        txtEmail = findViewById(R.id.txtLoginEmail);
+        txtPassword = findViewById(R.id.txtLoginPass);
         btnLogin = findViewById(R.id.btnLogin);
 
         firebaseAuth = FirebaseAuth.getInstance();

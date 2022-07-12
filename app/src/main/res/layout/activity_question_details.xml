@@ -10,7 +10,7 @@
         android:id="@+id/qdetails_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/purple_700"
+        android:background="?attr/colorPrimary"
         app:title="Question Details"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -23,108 +23,118 @@
         android:id="@+id/addQB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:padding="16dp"
         android:text="Add"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/addQB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/qdetails_toolbar">
 
-        <EditText
-            android:id="@+id/question"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:backgroundTint="#E91E63"
-            android:ems="10"
-            android:hint="Question"
-            android:inputType="textMultiLine"
-            android:lines="4"
-            android:maxLines="7"
-            android:textColor="@android:color/black"
-            android:textCursorDrawable="@null" />
+            android:hint="Question">
 
-        <EditText
-            android:id="@+id/optionA"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:lines="3"
+                android:maxLines="5" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:backgroundTint="@color/purple_700"
-            android:ems="10"
-            android:hint="Option A"
-            android:inputType="textMultiLine"
-            android:lines="1"
-            android:maxLines="2"
-            android:textColor="@android:color/black"
-            android:textCursorDrawable="@null" />
+            android:layout_marginTop="15dp"
+            android:hint="Option 1">
 
-        <EditText
-            android:id="@+id/optionB"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/optionA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:lines="2"
+                android:maxLines="3"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:backgroundTint="@color/purple_700"
-            android:ems="10"
-            android:hint="Option B"
-            android:inputType="textMultiLine"
-            android:lines="1"
-            android:maxLines="2"
-            android:textColor="@android:color/black"
-            android:textCursorDrawable="@null" />
+            android:layout_marginTop="5dp"
+            android:hint="Option 2">
 
-        <EditText
-            android:id="@+id/optionC"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/optionB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="2"
+                android:maxLines="3"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:backgroundTint="@color/purple_700"
-            android:ems="10"
-            android:hint="Option C"
-            android:inputType="textMultiLine"
-            android:lines="1"
-            android:maxLines="2"
-            android:textColor="@android:color/black"
-            android:textCursorDrawable="@null" />
+            android:layout_marginTop="5dp"
+            android:hint="Option 3">
 
-        <EditText
-            android:id="@+id/optionD"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/optionC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="2"
+                android:maxLines="3"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
-            android:backgroundTint="@color/purple_700"
-            android:ems="10"
-            android:hint="Option D"
-            android:inputType="textMultiLine"
-            android:lines="1"
-            android:maxLines="2"
-            android:textColor="@android:color/black"
-            android:textCursorDrawable="@null" />
+            android:layout_marginTop="5dp"
+            android:hint="Option 4">
 
-        <EditText
-            android:id="@+id/answer"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/optionD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="2"
+                android:maxLines="3"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#E91E63"
-            android:ems="10"
-            android:hint="Correct Answer Option"
-            android:inputType="number"
-            android:textColor="@android:color/black"
-            android:textCursorDrawable="@null" />
+            android:layout_marginTop="15dp"
+            android:hint="Correct Answer (Number of Option 1-4)">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/answer"
+                android:layout_width="match_parent"
+                android:inputType="number"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

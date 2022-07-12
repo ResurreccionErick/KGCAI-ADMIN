@@ -1,4 +1,4 @@
-package com.example.kgcai_admin;
+package com.example.kgcai_admin.adapter;
 
 import static com.example.kgcai_admin.CategoryActivity.catList;
 import static com.example.kgcai_admin.CategoryActivity.selected_cat_index;
@@ -24,6 +24,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.kgcai_admin.QuestionDetailsActivity;
+import com.example.kgcai_admin.QuestionModel;
+import com.example.kgcai_admin.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;

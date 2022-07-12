@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.kgcai_admin.adapter.ScoreAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,7 +56,7 @@ public class LeaderboardsActivity extends AppCompatActivity {
         leaderboardRv.setLayoutManager(manager);
         leaderboardRv.setHasFixedSize(true);
 
-        databaseReference.orderByChild("score").addValueEventListener(new ValueEventListener() {
+        databaseReference.orderByChild("Numeracy_score").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){

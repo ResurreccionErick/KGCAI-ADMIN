@@ -1,4 +1,4 @@
-package com.example.kgcai_admin;
+package com.example.kgcai_admin.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.kgcai_admin.R;
+import com.example.kgcai_admin.ScoreDataModel;
 
 import java.util.List;
 
