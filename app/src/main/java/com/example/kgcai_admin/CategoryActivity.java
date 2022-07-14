@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.example.kgcai_admin.helper.CategoryModelClass;
+
 public class CategoryActivity extends AppCompatActivity {
 
     private Toolbar toolbar;

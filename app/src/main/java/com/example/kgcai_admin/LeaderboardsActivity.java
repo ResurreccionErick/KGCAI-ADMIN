@@ -22,6 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.kgcai_admin.helper.ScoreDataModel;
+
 public class LeaderboardsActivity extends AppCompatActivity {
 
     private Toolbar toolbar;

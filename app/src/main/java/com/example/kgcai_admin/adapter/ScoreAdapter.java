@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.kgcai_admin.R;
-import com.example.kgcai_admin.ScoreDataModel;
+import com.example.kgcai_admin.helper.ScoreDataModel;
 
 import java.util.List;
 

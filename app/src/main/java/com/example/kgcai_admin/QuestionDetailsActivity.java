@@ -27,6 +27,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Map;
 
+import com.example.kgcai_admin.helper.QuestionModel;
+
 public class QuestionDetailsActivity extends AppCompatActivity {
 
     private EditText txtQues, txtOptionA, txtOptionB, txtOptionC, txtOptionD,txtAnswer;

@@ -25,7 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kgcai_admin.QuestionDetailsActivity;
-import com.example.kgcai_admin.QuestionModel;
+import com.example.kgcai_admin.helper.QuestionModel;
 import com.example.kgcai_admin.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

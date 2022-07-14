@@ -20,7 +20,7 @@ import androidx.collection.ArrayMap;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kgcai_admin.CategoryActivity;
-import com.example.kgcai_admin.CategoryModelClass;
+import com.example.kgcai_admin.helper.CategoryModelClass;
 import com.example.kgcai_admin.R;
 import com.example.kgcai_admin.SetsActivity;
 import com.google.android.gms.tasks.OnFailureListener;

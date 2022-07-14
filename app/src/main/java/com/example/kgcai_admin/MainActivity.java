@@ -1,5 +1,6 @@
 package com.example.kgcai_admin;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -66,5 +67,14 @@ public class MainActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signOut();
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) { //this is for back button
+        if (item.getItemId() == android.R.id.home) {
+            MainActivity.this.finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
