@@ -181,13 +181,13 @@ public class StudentRegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            DocumentReference reference = firestore.collection("Users").document(firebaseAuth.getCurrentUser().getUid()); //this is for firestore
-                            Map<String,Object> adminInfo = new HashMap<>();
-                            adminInfo.put("fullName",fullName);
-                            adminInfo.put("email", email);
-                            adminInfo.put("isUser", "1");
+//                            DocumentReference reference = firestore.collection("Users").document(firebaseAuth.getCurrentUser().getUid()); //this is for firestore
+//                            Map<String,Object> adminInfo = new HashMap<>();
+//                            adminInfo.put("fullName",fullName);
+//                            adminInfo.put("email", email);
+//                            adminInfo.put("isUser", "1");
 
-                            reference.set(adminInfo);
+//                            reference.set(adminInfo);
 
                             UserModel user = new UserModel(fullName, email);
                             FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user) //add it on firebase db
@@ -198,7 +198,12 @@ public class StudentRegisterActivity extends AppCompatActivity {
                                             updateUi(fullName,pickedImg, firebaseAuth.getCurrentUser());
                                             finish();
                                         }
-                                    });
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -254,7 +259,6 @@ public class StudentRegisterActivity extends AppCompatActivity {
                         HashMap hashMap = new HashMap();
                         hashMap.put("name",name);
                         hashMap.put("image",uri.toString());
-                        hashMap.put("score",0);
                         reference.child(currentUser.getUid()).setValue(hashMap)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override

@@ -25,7 +25,7 @@
         android:layout_marginTop="32dp"
         android:fontFamily="serif-monospace"
         android:text="ADMIN SIDE"
-        android:textSize="54sp"
+        android:textSize="45sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/imgLogo"

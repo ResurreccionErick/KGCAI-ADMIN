@@ -3,6 +3,8 @@ package com.example.kgcai_admin.adapter;
 import static com.example.kgcai_admin.CategoryActivity.catList;
 import static com.example.kgcai_admin.CategoryActivity.selected_cat_index;
 import static com.example.kgcai_admin.SetsActivity.selected_set_index;
+import static com.example.kgcai_admin.SetsActivity.setsList;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -24,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.kgcai_admin.QuestionActivity;
 import com.example.kgcai_admin.R;
 import com.example.kgcai_admin.SetsActivity;
+import com.example.kgcai_admin.helper.SetsModelClass;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -36,10 +39,11 @@ import java.util.Map;
 
 public class SetsAdapter extends RecyclerView.Adapter<SetsAdapter.ViewHolder> {
 
-    private List<String> setIds;
+    private List <SetsModelClass> sets_list;
 
-    public SetsAdapter(List<String> setIds) {
-        this.setIds = setIds;
+    public SetsAdapter(List<SetsModelClass> sets_list) {
+
+        this.sets_list = sets_list;
     }
 
     @NonNull
@@ -50,15 +54,14 @@ public class SetsAdapter extends RecyclerView.Adapter<SetsAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SetsAdapter.ViewHolder viewHolder, int i) {
-
-        String setID = setIds.get(i);
-        viewHolder.setData(i, setID, this);
+    public void onBindViewHolder(@NonNull SetsAdapter.ViewHolder holder, int position) {
+        String title = sets_list.get(position).getName();
+        holder.setData(title,position, title,this);
     }
 
     @Override
     public int getItemCount() {
-        return setIds.size();
+        return setsList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -79,9 +82,9 @@ public class SetsAdapter extends RecyclerView.Adapter<SetsAdapter.ViewHolder> {
             loadingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         }
 
-        private void setData(final int pos, final String setID, final SetsAdapter adapter)
+        private void setData(String title, final int pos, final String setID, final SetsAdapter adapter)
         {
-            setName.setText("SET " + String.valueOf(pos + 1));
+            setName.setText(title);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +108,6 @@ public class SetsAdapter extends RecyclerView.Adapter<SetsAdapter.ViewHolder> {
                             .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-
                                     deleteSet(pos, setID,itemView.getContext(), adapter);
                                 }
                             })
@@ -153,11 +155,11 @@ public class SetsAdapter extends RecyclerView.Adapter<SetsAdapter.ViewHolder> {
 
                                     Map<String, Object> catDoc = new ArrayMap<>();
                                     int index=1;
-                                    for(int i=0; i< setIds.size();  i++)
+                                    for(int i=0; i< setsList.size();  i++)
                                     {
                                         if(i != pos)
                                         {
-                                            catDoc.put("SET" + String.valueOf(index) + "_ID", setIds.get(i));
+                                            catDoc.put("SET" + String.valueOf(index) + "_ID", setsList.get(i));
                                             index++;
                                         }
                                     }

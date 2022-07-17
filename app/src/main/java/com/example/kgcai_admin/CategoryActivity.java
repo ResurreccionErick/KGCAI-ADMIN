@@ -55,7 +55,7 @@ public class CategoryActivity extends AppCompatActivity {
         cat_recycler_view = findViewById(R.id.subjRecyclerView);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Subjects");
+        getSupportActionBar().setTitle("Quiz Subjects");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         loadingDialog = new Dialog(CategoryActivity.this);
@@ -82,18 +82,18 @@ public class CategoryActivity extends AppCompatActivity {
 //            }
 //        });
 
-        dialogBtnAddSubj.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(dialogSubjName.getText().toString().isEmpty()){
-                    dialogSubjName.setError("Please Enter Subject Name");
-                    dialogSubjName.requestFocus();
-                    return;
-                }else{
-                    addNewSubject(dialogSubjName.getText().toString()); //from add new subj Edit text... values will pass into addNewSubject method parameter
-                }
-            }
-        });
+//        dialogBtnAddSubj.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(dialogSubjName.getText().toString().isEmpty()){
+//                    dialogSubjName.setError("Please Enter Subject Name");
+//                    dialogSubjName.requestFocus();
+//                    return;
+//                }else{
+//                    addNewSubject(dialogSubjName.getText().toString()); //from add new subj Edit text... values will pass into addNewSubject method parameter
+//                }
+//            }
+//        });
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -104,55 +104,55 @@ public class CategoryActivity extends AppCompatActivity {
 
     }
 
-    private void addNewSubject(String title) {
-        addSubjDialog.dismiss();
-        loadingDialog.show();
-
-        Map<String,Object> catData = new ArrayMap<>();
-        catData.put("NAME",title); //this is from AddNewSubj EditText
-        catData.put("SETS",0); //sets set as zero value
-        catData.put("COUNTER","1");
-
-        String doc_id = firestore.collection("QUIZ").document().getId(); //get all the ID from the QUIZ
-
-        firestore.collection("QUIZ").document(doc_id).set(catData).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Map<String,Object> catDoc = new ArrayMap<>(); //this ArrayMap will use to rewrite the information from Categories everytime addNewSubjects method called
-                catDoc.put("CAT"+String.valueOf(catList.size()+1) + "_NAME",title);
-                catDoc.put("CAT"+String.valueOf(catList.size()+1) + "_ID",doc_id);
-                catDoc.put("COUNT", catList.size()+1); //Count will increment
-
-                    firestore.collection("QUIZ").document("Categories") //Update data from Categories using catDoc arrayMap
-                            .update(catDoc).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Toast.makeText(getApplicationContext(), "Subject was added successfully", Toast.LENGTH_SHORT).show();
-
-                            catList.add(new CategoryModelClass(doc_id,title,"0","1")); //add id,title,and no of sets into catList arrayList
-
-                            adapter.notifyItemInserted(catList.size()); //display new subjects added into the end
-
-                            loadingDialog.dismiss();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(), "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                            loadingDialog.dismiss();
-                        }
-                    });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                loadingDialog.dismiss();
-            }
-        });
-    }
+//    private void addNewSubject(String title) {
+//        addSubjDialog.dismiss();
+//        loadingDialog.show();
+//
+//        Map<String,Object> catData = new ArrayMap<>();
+//        catData.put("NAME",title); //this is from AddNewSubj EditText
+//        catData.put("SETS",0); //sets set as zero value
+//        catData.put("COUNTER","1");
+//
+//        String doc_id = firestore.collection("QUIZ").document().getId(); //get all the ID from the QUIZ
+//
+//        firestore.collection("QUIZ").document(doc_id).set(catData).addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void unused) {
+//                Map<String,Object> catDoc = new ArrayMap<>(); //this ArrayMap will use to rewrite the information from Categories everytime addNewSubjects method called
+//                catDoc.put("CAT"+String.valueOf(catList.size()+1) + "_NAME",title);
+//                catDoc.put("CAT"+String.valueOf(catList.size()+1) + "_ID",doc_id);
+//                catDoc.put("COUNT", catList.size()+1); //Count will increment
+//
+//                    firestore.collection("QUIZ").document("Categories") //Update data from Categories using catDoc arrayMap
+//                            .update(catDoc).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void unused) {
+//                            Toast.makeText(getApplicationContext(), "Subject was added successfully", Toast.LENGTH_SHORT).show();
+//
+//                            catList.add(new CategoryModelClass(doc_id,title,"0","1")); //add id,title,and no of sets into catList arrayList
+//
+//                            adapter.notifyItemInserted(catList.size()); //display new subjects added into the end
+//
+//                            loadingDialog.dismiss();
+//                        }
+//                    }).addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            Toast.makeText(getApplicationContext(), "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();
+//
+//                            loadingDialog.dismiss();
+//                        }
+//                    });
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Toast.makeText(getApplicationContext(), "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();
+//
+//                loadingDialog.dismiss();
+//            }
+//        });
+//    }
 
 
     private void loadData() {

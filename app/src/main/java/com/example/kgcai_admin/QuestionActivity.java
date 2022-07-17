@@ -56,7 +56,7 @@ public class QuestionActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar_question);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Add Question");
+        getSupportActionBar().setTitle("Quiz Question");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         quesView = findViewById(R.id.questionRecyclerView);

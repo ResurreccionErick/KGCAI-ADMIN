@@ -36,6 +36,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     private Dialog loadingDialog, editDialog;
 
     public CategoryAdapter(List<CategoryModelClass> cat_list) {
+
         this.cat_list = cat_list;
     }
 

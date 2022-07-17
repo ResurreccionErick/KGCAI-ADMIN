@@ -54,6 +54,9 @@
             android:name=".LoginActivity"
             android:exported="true" />
         <activity
+            android:name=".ResetAdminPasswordActivity"
+            android:exported="true" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>

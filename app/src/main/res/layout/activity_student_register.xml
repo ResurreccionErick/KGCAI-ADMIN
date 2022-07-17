@@ -21,13 +21,27 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgRegister"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="32dp"
+        android:padding="8dp"
         android:src="@drawable/add_img_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_register" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="-45dp"
+        android:layout_marginTop="-46dp"
+        android:background="@drawable/round_bg_white"
+        app:layout_constraintStart_toEndOf="@+id/imgRegister"
+        app:layout_constraintTop_toBottomOf="@+id/imgRegister"
+        app:srcCompat="@drawable/ic_baseline_add_24"
+        app:tint="@color/black" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout3"
@@ -44,9 +58,8 @@
             android:id="@+id/txtRegisterFName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"/>
+            android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -121,6 +134,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

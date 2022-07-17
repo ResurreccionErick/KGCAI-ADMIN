@@ -140,7 +140,7 @@ public class AdminRegistrationActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                DocumentReference reference = firestore.collection("Users").document(firebaseAuth.getCurrentUser().getUid()); //this is for firestore
+                                DocumentReference reference = firestore.collection("Users").document(firebaseAuth.getCurrentUser().getDisplayName()); //this is for firestore
                                 Map<String,Object> adminInfo = new HashMap<>();
                                 adminInfo.put("fullName",fullName);
                                 adminInfo.put("email", email);
@@ -149,7 +149,7 @@ public class AdminRegistrationActivity extends AppCompatActivity {
                                 reference.set(adminInfo);
 
                                 UserModel user = new UserModel(fullName, email);
-                                FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user) //add it on firebase db
+                                FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getDisplayName()).setValue(user) //add it on firebase db
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
