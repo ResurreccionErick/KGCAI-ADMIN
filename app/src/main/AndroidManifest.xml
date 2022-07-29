@@ -15,6 +15,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KGCAIADMIN">
         <activity
+            android:name=".TextRecognitionActivity"
+            android:exported="true" />
+        <activity
+            android:name=".TextActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AddTextActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainTextActivity"
+            android:exported="true" />
+        <activity
             android:name=".AdminRegistrationActivity"
             android:exported="true" />
         <activity

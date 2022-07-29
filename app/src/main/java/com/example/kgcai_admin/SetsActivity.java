@@ -127,6 +127,7 @@ public class SetsActivity extends AppCompatActivity {
 
                         setsList.add(new SetsModelClass(setID, setName, "0", "1"));
                         setsIDs.add(doc.getString("SET" + String.valueOf(i) + "_ID"));
+
                     }
 
                     adapter = new SetsAdapter(setsList);
@@ -158,10 +159,6 @@ public class SetsActivity extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
 
                         Map<String,Object> catDoc = new ArrayMap<>();
-//                        catDoc.put("COUNTER", String.valueOf(Integer.valueOf(curr_counter) + 1)  );
-//                        catDoc.put("SET" + String.valueOf(setsIDs.size() + 1) + "_ID", curr_counter);
-//                        catDoc.put("SETS", setsIDs.size() + 1);
-
 
                         catDoc.put("COUNTER", String.valueOf(Integer.valueOf(curr_counter) + 1)  );
                         catDoc.put("SET" + String.valueOf(setsList.size() + 1) + "_ID" , curr_counter);
@@ -182,7 +179,6 @@ public class SetsActivity extends AppCompatActivity {
 
                                         adapter.notifyItemInserted(setsIDs.size());
                                         loadingDialog.dismiss();
-
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
@@ -192,7 +188,6 @@ public class SetsActivity extends AppCompatActivity {
                                         loadingDialog.dismiss();
                                     }
                                 });
-
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

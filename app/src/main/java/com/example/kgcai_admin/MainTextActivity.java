@@ -8,19 +8,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
-public class MainVideosActivity extends AppCompatActivity {
+public class MainTextActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private FloatingActionButton btnNumeracy, btnLanguageLiteracy, btnFilipino, btnReadings;
+    private FloatingActionButton btnNumeracy, btnFilipino, btnLanguageLiteracy, btnReadings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_videos);
+        setContentView(R.layout.activity_main_text);
 
         toolbar = findViewById(R.id.toolbar_addVideos);
 
@@ -30,13 +29,13 @@ public class MainVideosActivity extends AppCompatActivity {
         btnLanguageLiteracy = findViewById(R.id.fab_language_literacy);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Add Videos");
+        getSupportActionBar().setTitle("Add Text");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btnNumeracy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TextActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddTextActivity.class);
                 intent.putExtra("VideoFolder", "Numeracy_Videos");
                 startActivity(intent);
             }
@@ -45,7 +44,7 @@ public class MainVideosActivity extends AppCompatActivity {
         btnLanguageLiteracy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TextActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddTextActivity.class);
                 intent.putExtra("VideoFolder", "LanguageLiteracy_Videos");
                 startActivity(intent);
             }
@@ -54,7 +53,7 @@ public class MainVideosActivity extends AppCompatActivity {
         btnFilipino.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TextActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddTextActivity.class);
                 intent.putExtra("VideoFolder", "Filipino_Videos");
                 startActivity(intent);
             }
@@ -63,7 +62,7 @@ public class MainVideosActivity extends AppCompatActivity {
         btnReadings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TextActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddTextActivity.class);
                 intent.putExtra("VideoFolder", "Readings_Videos");
                 startActivity(intent);
             }
@@ -73,9 +72,8 @@ public class MainVideosActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) { //this is for back button
         if (item.getItemId() == android.R.id.home) {
-            MainVideosActivity.this.finish();
+            MainTextActivity.this.finish();
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

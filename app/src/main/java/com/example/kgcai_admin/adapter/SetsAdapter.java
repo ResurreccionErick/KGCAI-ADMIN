@@ -61,6 +61,7 @@ public class SetsAdapter extends RecyclerView.Adapter<SetsAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
+
         return setsList.size();
     }
 
@@ -85,7 +86,6 @@ public class SetsAdapter extends RecyclerView.Adapter<SetsAdapter.ViewHolder> {
         private void setData(String title, final int pos, final String setID, final SetsAdapter adapter)
         {
             setName.setText(title);
-
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -171,7 +171,7 @@ public class SetsAdapter extends RecyclerView.Adapter<SetsAdapter.ViewHolder> {
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
-                                                    Toast.makeText(context,"Set deleted Sucesfully",Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(context,"Set deleted Successfully",Toast.LENGTH_SHORT).show();
 
                                                     SetsActivity.setsIDs.remove(pos);
 

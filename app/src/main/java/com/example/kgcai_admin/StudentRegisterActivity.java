@@ -181,13 +181,6 @@ public class StudentRegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-//                            DocumentReference reference = firestore.collection("Users").document(firebaseAuth.getCurrentUser().getUid()); //this is for firestore
-//                            Map<String,Object> adminInfo = new HashMap<>();
-//                            adminInfo.put("fullName",fullName);
-//                            adminInfo.put("email", email);
-//                            adminInfo.put("isUser", "1");
-
-//                            reference.set(adminInfo);
 
                             UserModel user = new UserModel(fullName, email);
                             FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user) //add it on firebase db

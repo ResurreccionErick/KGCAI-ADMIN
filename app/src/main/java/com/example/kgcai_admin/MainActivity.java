@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnQuiz, btnVideos, btnAddNewStudent;
+    private Button btnQuiz, btnVideos, btnAddNewStudent, btnText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnQuiz = findViewById(R.id.btnMainQuiz);
         btnVideos = findViewById(R.id.btnMainVideos);
+        btnText = findViewById(R.id.btnAddText);
         btnAddNewStudent = findViewById(R.id.btnAddNewStudent);
 
         //click listener to logout
@@ -57,6 +58,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), MainStudentActivity.class));
+            }
+        });
+
+        btnText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), TextRecognitionActivity.class));
             }
         });
     }
